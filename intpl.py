@@ -6,19 +6,24 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 import json
 import time
 import random
 
 chromedriver = Service('chromedriver.exe')
-browser = webdriver.Chrome(service=chromedriver)
-random_append = random.randint(0, 999999)
+chrome_options = Options()
+chrome_options.add_argument("--log-level=3")
+
+
+browser = webdriver.Chrome(service=chromedriver, options=chrome_options)
 
 class tools:
     def create_account(login, password, recovery):
+        random_append = random.randint(0, 999999)
         login = login + str(random_append)
         browser.get("https://int.pl/#/register")
-        print(f"Creating account with {login}, {password}, {recovery}")
+        print(f"Creating account with {login}@int.pl, {password}, {recovery}")
 
         login_field = browser.find_element_by_id('loginId')
         login_field.send_keys(login)
@@ -53,14 +58,21 @@ class tools:
         #     u_fix.send_keys(random_append)
             
         # Submits the form
-        time.sleep(1)
+        time.sleep(2)
         submit_button = browser.find_element_by_xpath('//*[@id="ng-app"]/body/section[1]/div[2]/div/div/div[1]/form[2]/button[1]')
         submit_button.click()
         
         #Checks if success
-        success_msg = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, '/html/body/section/div[2]/div/div/div[1]/form[2]/div[1]/div/label')))
+        try:
+            success_msg = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, '/html/body/section/div[2]/div/div/div[1]/form[2]/div[1]/div/label')))
+            if success_msg.get_attribute('textContent') == "Twoje konto pocztowe zostało założone":
+                print(f"Successfully created {login}@int.pl:{password}")
+                browser.delete_all_cookies()
+                browser.refresh()
+        except:
+            print("Error")        
 
-        while True:
-            continue
+        # while True:
+        #     continue
         
         
