@@ -18,15 +18,16 @@ browser = webdriver.Chrome(service=chromedriver, options=chrome_options)
 
 class tools:
     def create_account(login, password, recovery):
+        log_file = open('log.txt', 'a')
         #Generates and appends a random number
         random_append = random.randint(0, 999999)
-        login = login + str(random_append)
+        new_login = login + str(random_append)
         browser.get("https://int.pl/#/register")
-        print(f"Creating account with {login}@int.pl, {password}, {recovery}")
+        print(f"Creating {new_login}@int.pl..")
 
         #Fill in Login (email)
         login_field = browser.find_element_by_id('loginId')
-        login_field.send_keys(login)
+        login_field.send_keys(new_login)
 
         #Fill in Password
         password_field = browser.find_element_by_xpath('//*[@id="passwordId"]')
@@ -62,13 +63,12 @@ class tools:
         try:
             success_msg = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, '/html/body/section/div[2]/div/div/div[1]/form[2]/div[1]/div/label')))
             if success_msg.get_attribute('textContent') == "Twoje konto pocztowe zostało założone":
-                print(f"Successfully created {login}@int.pl:{password}")
+                print(f"Successfully created {new_login}@int.pl:{password}")
+                log_file.write(f"{new_login}@int.pl:{password}\n")
                 browser.delete_all_cookies()
                 browser.refresh()
         except:
-            print("Error")        
+            print("Error - Most likely ratelimnited")        
 
-        # while True:
-        #     continue
         
         
