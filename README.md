@@ -48,3 +48,7 @@ Make sure your Chrome is updated to v.101
 
 
 
+
+## TODO
+- Add threading
+- Discord integration
