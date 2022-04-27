@@ -36,3 +36,15 @@ isu33982@int.pl:samplepassword
 isu11349@int.pl:samplepassword
 isu45538@int.pl:samplepassword
 ```
+## FAQ
+#### What's the point of this tool? Why use it over a catch-all on a custom domain?
+Some websites don't like when users register accounts with emails from custom domains. This tool allows users who are looking to automate certain activities create bulk email accounts from a well-established email provider.
+
+#### I'm getting an Error while creating the accounts
+It's mostly the fault of a rate limit. Try using a different IP.
+
+#### The program doesn't start
+Make sure your Chrome is updated to v.101
+
+
+
