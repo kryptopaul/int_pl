@@ -1,13 +1,14 @@
 from intpl import tools
 import json
 
-config_json = open('config.json')
-config = json.load(config_json)
+
+config = json.load(open('config.json'))
 
 login = config['login']
 password = config['password']
 recovery = config['recovery']
 
+amount = input("How many to generate?: ")
 
-for x in range(5):
+for x in range(int(amount)):
     tools.create_account(login, password, recovery)
