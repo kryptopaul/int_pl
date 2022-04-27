@@ -3,4 +3,4 @@ import json
 
 
 
-tools.create_account("verylongnottakenmain", "passX18chars", "recovery@gmail.com")
+tools.create_account("isu", "passX18chars", "recovery@gmail.com")
