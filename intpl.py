@@ -9,15 +9,22 @@ from selenium.webdriver.chrome.options import Options
 import time
 import random
 
-chromedriver = Service('chromedriver.exe')
-chrome_options = Options()
-chrome_options.add_argument("--log-level=3")
-chrome_options.add_argument('--headless')
-chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
-browser = webdriver.Chrome(service=chromedriver, options=chrome_options)
+# Commented because I wanted the browser to init with each function run - otherwise threading doesn't work.
+# chromedriver = Service('chromedriver.exe')
+# chrome_options = Options()
+# chrome_options.add_argument("--log-level=3")
+# chrome_options.add_argument('--headless')
+# chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+# browser = webdriver.Chrome(service=chromedriver, options=chrome_options)
 
 class tools:
     def create_account(login, password, recovery):
+        chromedriver = Service('chromedriver.exe')
+        chrome_options = Options()
+        chrome_options.add_argument("--log-level=3")
+        chrome_options.add_argument('--headless')
+        chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        browser = webdriver.Chrome(service=chromedriver, options=chrome_options)
         log_file = open('log.txt', 'a')
         #Generates and appends a random number
         random_append = random.randint(0, 999999)
