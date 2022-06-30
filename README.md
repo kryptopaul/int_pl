@@ -6,7 +6,7 @@ A bulk-account generator for a Polish email provider int.pl
 
 ## Requirements
 
-- Google Chrome version 101+
+- Google Chrome version 103+
 - Selenium
 ## Installation
 
